@@ -8,7 +8,7 @@
  * https://github.com/luis-almeida
  */
 
-;(function($) {
+(function($) {
 
   $.fn.unveil = function(threshold, callback) {
 
@@ -23,8 +23,12 @@
       var source = this.getAttribute(attrib);
       source = source || this.getAttribute("data-src");
       if (source) {
-        this.setAttribute("src", source);
-        if (typeof callback === "function") callback.call(this);
+        if (this.tagName === 'IMG') {
+          this.setAttribute("src", source);
+        } else {
+          this.style.backgroundImage = 'url(' + source + ')';
+        }
+        if (typeof callback === "function") { callback.call(this); }
       }
     });
 
